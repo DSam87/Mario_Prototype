@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -247,6 +248,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c34c11f94bad446a8f342da0a704ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1291214446}
+  farBackground: {fileID: 270509996}
+  middleBackground: {fileID: 99542106}
+  minHight: -1.8
+  maxHight: 2.8
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -397,7 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853250490}
   - component: {fileID: 853250489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: simple_setup_level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +730,8 @@ GameObject:
   - component: {fileID: 1291214447}
   - component: {fileID: 1291214448}
   - component: {fileID: 1291214449}
-  m_Layer: 0
+  - component: {fileID: 1291214450}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +800,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1457065881}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -835,8 +855,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theRB: {fileID: 1291214447}
-  playerSpeed: 11
+  playerSpeed: 8
   jumpForce: 13
+  groundCheckPoint: {fileID: 1457065881}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!95 &1291214450
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291214444}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db2cb584778ebce44b1c712d6994b57f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1457065880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457065881}
+  m_Layer: 7
+  m_Name: Ground Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1457065881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457065880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.99, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1291214446}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1575986987
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,9 +1008,9 @@ GameObject:
   - component: {fileID: 1861275305}
   - component: {fileID: 1861275304}
   - component: {fileID: 1861275303}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Collider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1169,7 +1242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1921879831}
   - component: {fileID: 1921879832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ceiling Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
