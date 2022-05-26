@@ -42,11 +42,11 @@ public class PlayerHealthController : MonoBehaviour
         
     }
 
-    public void DealDamage()
+    public void DealDamage(int damage = 1)
     {
         if(invincabilityCounter <= 0)
         {
-            currentHealth--;
+            currentHealth -= damage;
             Debug.Log("Player Damaged");
 
             if(currentHealth <= 0)
@@ -64,6 +64,6 @@ public class PlayerHealthController : MonoBehaviour
 
             UIController.instance.UpdateHealthUI();
         }
-
     }
+
 }
