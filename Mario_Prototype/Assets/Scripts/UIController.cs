@@ -9,6 +9,9 @@ public class UIController : MonoBehaviour
     public Image heart1, heart2, heart3;
     public Sprite heartFull, heartEmpty;
 
+    public Text currentGemText;
+    public Text maxGemText;
+
 
 
     private void Awake() 
@@ -19,6 +22,17 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Pickup[] pickupObjects = FindObjectsOfType<Pickup>();
+        int maxGemsInt = 0;
+        for (int i = 0; i < pickupObjects.Length ; i++)
+        {
+            if(pickupObjects[i].isGem)
+            {
+                maxGemsInt++;
+            }
+        }
+        maxGemText.text = "/" + maxGemsInt.ToString();
         
     }
 
@@ -55,6 +69,10 @@ public class UIController : MonoBehaviour
                 heart3.sprite = heartEmpty;            
             break;
         }
-        
+    }
+
+    public void UpdateGemUI()
+    {
+        currentGemText.text = (LevelManager.instance.gemsCollected).ToString();
     }
 }

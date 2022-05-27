@@ -9,6 +9,8 @@ public class Pickup : MonoBehaviour
     public bool isHealth;
     private bool isCollected;
 
+    public GameObject pickupEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class Pickup : MonoBehaviour
             {
                 LevelManager.instance.gemsCollected++;
                 isCollected = true;
+                UIController.instance.UpdateGemUI();
+                Instantiate(pickupEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
 
@@ -39,9 +43,11 @@ public class Pickup : MonoBehaviour
                     PlayerHealthController.instance.currentHealth++;
                     isCollected = true;
                     UIController.instance.UpdateHealthUI();
+                    Instantiate(pickupEffect, transform.position, transform.rotation);
                     Destroy(gameObject);
                 }
             }
+
         }    
     }
 }

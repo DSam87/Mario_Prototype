@@ -106,7 +106,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1256356097
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7815371044791450175, guid: d0ff653f4b4d3f14dab1926a9ed3efb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,6 +175,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  knockBackLength: 0.25
+  knockBackForce: 5
 --- !u!95 &9145974216269755903
 Animator:
   serializedVersion: 3
@@ -208,3 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
+  invincibilityLength: 1
+  theSR: {fileID: 0}
+  deathObject: {fileID: 6809069565464033907, guid: 7385deae7fbd8a7478bac14843b776e8, type: 3}
