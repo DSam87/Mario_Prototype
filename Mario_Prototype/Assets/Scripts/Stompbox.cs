@@ -26,6 +26,7 @@ public class Stompbox : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
+            AudioManager.instance.PlaySFX(3);
             Debug.Log("Hit enemy");
             other.transform.parent.gameObject.SetActive(false);
             Instantiate(deathEffect, transform.position, transform.rotation);

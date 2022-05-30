@@ -40,8 +40,6 @@ public class EnemeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         currentPosition = transform.position.y;
 
         // Animation
