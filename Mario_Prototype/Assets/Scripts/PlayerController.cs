@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if(knockBackCounter <= 0)
+        if(knockBackCounter <= 0 && !PauseMenu.instance.isPaused)
         {
             // /////////////////////////////////////////////
             // Moving Player
