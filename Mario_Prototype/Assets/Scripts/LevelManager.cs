@@ -36,7 +36,12 @@ public class LevelManager : MonoBehaviour
     private IEnumerator RespawnCo()
     {
         PlayerController.instance.gameObject.SetActive(false);
-        yield return new WaitForSeconds(waitToRespawn);
+        yield return new WaitForSeconds(waitToRespawn - (1 / UIController.instance.fadeSpeed));
+        UIController.instance.FadeToBlack();
+
+        yield return new WaitForSeconds((1 / UIController.instance.fadeSpeed) + .2f);
+        UIController.instance.FadeFromBlack();
+
         PlayerController.instance.gameObject.SetActive(true);
 
         PlayerController.instance.transform.position =  CheckpointController.instance.spawnPoint;
