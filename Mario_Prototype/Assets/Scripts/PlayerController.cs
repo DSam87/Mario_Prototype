@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     public float bounceForce;
+    public bool stopInput;
 
 
     private void Awake() 
@@ -40,65 +41,67 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-        if(knockBackCounter <= 0 && !PauseMenu.instance.isPaused)
+        if(!stopInput)
         {
-            // /////////////////////////////////////////////
-            // Moving Player
-            // /////////////////////////////////////////////
-            theRB.velocity = new Vector2(playerSpeed * Input.GetAxisRaw("Horizontal"), theRB.velocity.y);
-            isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, .2f, whatIsGround);
-
-            // /////////////////////////////////////////////
-            // Player Jumping
-            // /////////////////////////////////////////////
-            if(Input.GetButtonDown("Jump"))
+            if(knockBackCounter <= 0 && !PauseMenu.instance.isPaused)
             {
-                if(isGrounded)
+                // /////////////////////////////////////////////
+                // Moving Player
+                // /////////////////////////////////////////////
+                theRB.velocity = new Vector2(playerSpeed * Input.GetAxisRaw("Horizontal"), theRB.velocity.y);
+                isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, .2f, whatIsGround);
+
+                // /////////////////////////////////////////////
+                // Player Jumping
+                // /////////////////////////////////////////////
+                if(Input.GetButtonDown("Jump"))
                 {
-                    isGrounded = false;
-                    canDubleJump = true;
-                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                    AudioManager.instance.PlaySFX(10);
+                    if(isGrounded)
+                    {
+                        isGrounded = false;
+                        canDubleJump = true;
+                        theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+                        AudioManager.instance.PlaySFX(10);
+                    }
+                    else if(canDubleJump)
+                    {
+                        canDubleJump = false;
+                        theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+                        AudioManager.instance.PlaySFX(10);
+                    }
                 }
-                else if(canDubleJump)
+
+                // /////////////////////////////////////////////
+                // Animator Player Jumping & Running
+                // /////////////////////////////////////////////
+
+                if(theRB.velocity.x < 0)
                 {
-                    canDubleJump = false;
-                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                    AudioManager.instance.PlaySFX(10);
+                    transform.localScale = new Vector3(-1,1,1);
+                }
+                else if(theRB.velocity.x > 0)
+                {
+                    transform.localScale = new Vector3(1,1,1);
+                }
+            }
+            else
+            {
+                knockBackCounter -= Time.deltaTime;
+                if(transform.localScale.x == 1)
+                {
+                    theRB.velocity = new Vector2(-knockBackForce, theRB.velocity.y);
+                }
+                if(transform.localScale.x == -1)
+                {
+                    theRB.velocity = new Vector2(knockBackForce, theRB.velocity.y);
                 }
             }
 
-            // /////////////////////////////////////////////
-            // Animator Player Jumping & Running
-            // /////////////////////////////////////////////
-
-            if(theRB.velocity.x < 0)
-            {
-                transform.localScale = new Vector3(-1,1,1);
-            }
-            else if(theRB.velocity.x > 0)
-            {
-                transform.localScale = new Vector3(1,1,1);
-            }
+            anim.SetBool("isGrounded", isGrounded);
+            anim.SetFloat("playerSpeed", Mathf.Abs(theRB.velocity.x));
         }
-        else
-        {
-            knockBackCounter -= Time.deltaTime;
-            if(transform.localScale.x == 1)
-            {
-                theRB.velocity = new Vector2(-knockBackForce, theRB.velocity.y);
-            }
-            if(transform.localScale.x == -1)
-            {
-                theRB.velocity = new Vector2(knockBackForce, theRB.velocity.y);
-            }
-        }
-
-        anim.SetBool("isGrounded", isGrounded);
-        anim.SetFloat("playerSpeed", Mathf.Abs(theRB.velocity.x));
     }
+
 
     public void KnockBack()
     {

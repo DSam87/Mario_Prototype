@@ -38,12 +38,14 @@ public class PauseMenu : MonoBehaviour
             pauseScreen.SetActive(false);
             isPaused = false;
             Time.timeScale = 1f;
+            UIController.instance.fadeScreen.gameObject.SetActive(true);
         }
         else
         {
             isPaused = true;
             pauseScreen.SetActive(true);
             Time.timeScale = 0f;
+            UIController.instance.fadeScreen.gameObject.SetActive(false);
         }
 
     }
